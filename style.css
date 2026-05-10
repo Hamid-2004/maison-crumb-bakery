@@ -1,79 +1,136 @@
 /* =========================
-   MOBILE RESPONSIVE
+   PERFECT MOBILE VERSION
 ========================= */
 
 @media (max-width: 768px) {
 
   nav {
-    padding: 16px 20px;
+    padding: 18px 20px;
     height: auto;
     flex-direction: column;
     align-items: flex-start;
-    gap: 18px;
+    gap: 20px;
+  }
+
+  .nav-logo {
+    width: 100%;
+  }
+
+  .logo-name {
+    font-size: 18px;
   }
 
   .nav-links {
     width: 100%;
-    flex-wrap: wrap;
-    gap: 14px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 10px;
+  }
+
+  .nav-links li {
+    list-style: none;
   }
 
   .nav-links a {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .nav-cta {
     width: 100%;
     justify-content: center;
+    padding: 14px;
   }
 
   .hero {
-    padding: 60px 20px 40px;
+    padding: 50px 20px 30px;
   }
 
   .hero h1 {
-    font-size: 52px;
-    line-height: 0.95;
+    font-size: 72px;
+    line-height: 0.9;
   }
 
   .hero-sub {
-    font-size: 14px;
+    font-size: 15px;
+    line-height: 1.6;
   }
 
-  .divider-ornament .line {
-    width: 40px;
+  .divider-ornament {
+    margin-top: 20px;
   }
 
   .filter-bar {
-    gap: 8px;
+    margin-top: 32px;
+    gap: 12px;
   }
 
   .filter-btn {
-    font-size: 12px;
-    padding: 8px 16px;
+    padding: 10px 18px;
+    font-size: 13px;
   }
 
+  /* IMPORTANT FIX */
   .products-grid {
     grid-template-columns: 1fr;
     padding: 0 20px 60px;
-    gap: 18px;
+    gap: 24px;
   }
 
-  .card-body {
-    padding: 18px;
+  .product-card {
+    width: 100%;
+  }
+
+  .card-img {
+    aspect-ratio: 1 / 0.9;
   }
 
   .card-name {
-    font-size: 24px;
+    font-size: 34px;
+    line-height: 1;
+  }
+
+  .card-desc {
+    font-size: 14px;
+  }
+
+  .card-price {
+    font-size: 32px;
+  }
+
+  .card-category {
+    font-size: 11px;
+  }
+
+  .card-body {
+    padding: 22px;
   }
 
   footer {
     grid-template-columns: 1fr;
-    padding: 36px 20px 90px;
+    padding: 40px 20px 120px;
+    gap: 30px;
+  }
+
+  .footer-col {
+    align-items: flex-start;
+  }
+
+  .footer-main {
+    font-size: 18px;
+  }
+
+  .footer-sub {
+    font-size: 14px;
+    line-height: 1.5;
   }
 
   .footer-logo-circle {
     right: 20px;
-    bottom: 20px;
+    bottom: 30px;
+  }
+
+  .botanical-tr {
+    width: 180px;
+    opacity: 0.08;
   }
 }
