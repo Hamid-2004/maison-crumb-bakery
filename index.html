@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Maison Crumb – Luxury Bakery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"> 
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5f0e8;
+      --warm-white: #faf7f2;
+      --gold: #b8944a;
+      --gold-light: #d4af6a;
+      --dark: #1a1410;
+      --dark-brown: #2c1f14;
+      --text: #3a2e26;
+      --muted: #8a7a6a;
+      --border: #e0d5c5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--warm-white);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none; color: var(--dark);
+    }
+
+    .logo-circle {
+      width: 44px; height: 44px;
+      background: var(--dark);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px; font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 1px;
+      flex-shrink: 0;
+    }
+
+    .logo-text { line-height: 1.1; }
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .logo-tagline {
+      font-size: 9px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold);
+      display: block; margin-top: 1px;
+    }
+
+    .nav-links {
+      display: flex; gap: 36px; list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--text);
+      font-size: 14px; letter-spacing: 0.5px;
+      position: relative; padding-bottom: 3px;
+      transition: color 0.2s;
+    }
+    .nav-links a.active::after,
+    .nav-links a:hover::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px; background: var(--gold);
+    }
+    .nav-links a::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 50%; right: 50%;
+      height: 1px; background: var(--gold);
+      transition: left 0.3s, right 0.3s;
+    }
+    .nav-links a:hover::after { left: 0; right: 0; }
+    .nav-links a.active::after { left: 0; right: 0; }
+
+    .nav-cta {
+      display: flex; align-items: center; gap: 9px;
+      background: var(--dark); color: #fff;
+      border: none; padding: 12px 22px;
+      border-radius: 30px; cursor: pointer;
+      font-family: 'Jost', sans-serif;
+      font-size: 13px; font-weight: 400; letter-spacing: 0.5px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--dark-brown); transform: translateY(-1px); }
+    .nav-cta svg { width: 16px; height: 16px; }
+
+    /* ── HERO SECTION ── */
+    .hero {
+      position: relative;
+      padding: 80px 48px 64px;
+      overflow: hidden;
+    }
+
+    /* decorative botanical corners */
+    .botanical-tl, .botanical-tr {
+      position: absolute; top: 0;
+      width: 280px; opacity: 0.18; pointer-events: none;
+    }
+    .botanical-tl { left: 0; transform: scaleX(-1); }
+    .botanical-tr { right: 0; }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(64px, 7vw, 96px);
+      font-weight: 300; line-height: 1.0;
+      color: var(--dark); margin-bottom: 18px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-sub {
+      font-size: 15px; color: var(--muted);
+      letter-spacing: 0.3px; margin-bottom: 32px;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    .divider-ornament {
+      display: flex; align-items: center; gap: 10px;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+    .divider-ornament .line { height: 1px; width: 60px; background: var(--gold); }
+    .divider-ornament .fleur { color: var(--gold); font-size: 12px; letter-spacing: 4px; }
+
+    /* ── FILTER TABS ── */
+    .filter-bar {
+      display: flex; gap: 10px; margin: 40px 0 36px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.25s ease both;
+    }
+    .filter-btn {
+      border: 1.5px solid var(--border);
+      background: transparent; color: var(--text);
+      padding: 9px 22px; border-radius: 30px;
+      cursor: pointer; font-family: 'Jost', sans-serif;
+      font-size: 13px; letter-spacing: 0.3px;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .filter-btn.active {
+      background: var(--dark); color: #fff;
+      border-color: var(--dark);
+    }
+
+    /* ── PRODUCT GRID ── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      padding: 0 48px 80px;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    @media (max-width: 1300px) { .products-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 1000px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 700px)  { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .product-card {
+      background: var(--warm-white);
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    }
+
+    .card-img {
+      width: 100%; aspect-ratio: 1 / 1;
+      object-fit: cover; display: block;
+      transition: transform 0.5s ease;
+    }
+    .product-card:hover .card-img { transform: scale(1.04); }
+    .card-img-wrap { overflow: hidden; }
+
+    .card-body { padding: 20px; }
+
+    .card-category {
+      font-size: 9px; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 500;
+      line-height: 1.2; color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      font-size: 12.5px; color: var(--muted);
+      line-height: 1.6; margin-bottom: 16px;
+    }
+
+    .card-divider {
+      width: 32px; height: 1px;
+      background: var(--gold); margin-bottom: 14px;
+    }
+
+    .card-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 500;
+      color: var(--dark);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      padding: 40px 48px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      border-top: 1px solid #333;
+    }
+    .footer-col {
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .footer-icon {
+      width: 42px; height: 42px; flex-shrink: 0;
+      background: #2a2018;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .footer-icon svg { width: 18px; height: 18px; stroke: var(--gold-light); fill: none; }
+    .footer-col-content {}
+    .footer-label {
+      font-size: 10px; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .footer-main {
+      font-size: 14px; color: #fff;
+      margin-bottom: 2px;
+    }
+    .footer-sub {
+      font-size: 12px; color: #6a5e52;
+    }
+
+    .footer-brand {
+      position: absolute; right: 48px; bottom: 40px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px; letter-spacing: 2px;
+      color: #3a2e26; text-transform: uppercase;
+    }
+
+    footer { position: relative; }
+
+    .footer-logo-circle {
+      width: 52px; height: 52px;
+      border: 1.5px solid #3a2e26;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: absolute; right: 48px; bottom: 32px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px; color: #3a2e26; letter-spacing: 1px;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── HIDDEN CARDS (filter) ── */
+    .product-card.hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-circle">MC</div>
+    <div class="logo-text">
+      <div class="logo-name">Maison Crumb</div>
+      <span class="logo-tagline">Luxury Bakery</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#" class="active">Menu</a></li>
+    <li><a href="#">Signature</a></li>
+    <li><a href="#">Atelier</a></li>
+    <li><a href="#">Birthday Cakes</a></li>
+    <li><a href="#">WhatsApp Orders</a></li>
+  </ul>
+
+  <a href="https://wa.me/923001234567" class="nav-cta">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    Order on WhatsApp
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="menu">
+  <!-- Botanical SVG corners -->
+  <svg class="botanical-tr" viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M280 10 C240 40, 180 30, 160 80 C140 130, 200 150, 180 200" stroke="#b8944a" stroke-width="1.2" fill="none"/>
+    <path d="M260 20 C230 60, 270 100, 240 140" stroke="#b8944a" stroke-width="0.8" fill="none"/>
+    <path d="M200 5 C190 50, 220 80, 200 120" stroke="#b8944a" stroke-width="0.8" fill="none"/>
+    <path d="M160 80 C130 70, 110 90, 90 80" stroke="#b8944a" stroke-width="0.7" fill="none"/>
+    <path d="M180 200 C160 220, 140 210, 120 230" stroke="#b8944a" stroke-width="0.7" fill="none"/>
+    <ellipse cx="165" cy="55" rx="8" ry="4" fill="#b8944a" opacity="0.4" transform="rotate(-20 165 55)"/>
+    <ellipse cx="205" cy="75" rx="6" ry="3" fill="#b8944a" opacity="0.35" transform="rotate(-40 205 75)"/>
+    <ellipse cx="185" cy="165" rx="7" ry="3.5" fill="#b8944a" opacity="0.35" transform="rotate(30 185 165)"/>
+  </svg>
+
+  <div class="hero-content">
+    <h1>Our Creations</h1>
+    <p class="hero-sub">Thoughtfully baked. Beautifully crafted.</p>
+    <div class="divider-ornament">
+      <div class="line"></div>
+      <span class="fleur">✦ ✦ ✦</span>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="cakes">Cakes</button>
+      <button class="filter-btn" data-filter="birthday-cakes">Birthday Cakes</button>
+      <button class="filter-btn" data-filter="pastries">Pastries</button>
+      <button class="filter-btn" data-filter="breads">Breads</button>
+      <button class="filter-btn" data-filter="gifts">Gifts</button>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<div class="products-grid">
+
+  <!-- 1 Belgian Chocolate Cake -->
+  <div class="product-card" data-category="cakes">
+    <div class="card-img-wrap">
+      <img class="card-img" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80" alt="Belgian Chocolate Cake"/>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Cakes</div>
+      <div class="card-name">Belgian Chocolate Cake</div>
+      <div class="card-desc">Moist chocolate layers with rich Belgian ganache and chocolate buttercream.</div>
+      <div class="card-divider"></div>
+      <div class="card-price">PKR 4,200</div>
+    </div>
+  </div>
+
+  <!-- 2 Classic Vanilla Cake -->
+  <div class="product-card" data-category="birthday-cakes">
+    <div class="card-img-wrap">
+      <img class="card-img" src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=500&q=80" alt="Classic Vanilla Cake"/>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Birthday Cakes</div>
+      <div class="card-name">Classic Vanilla Cake</div>
+      <div class="card-desc">Soft vanilla sponge layered with fresh cream and real vanilla bean.</div>
+      <div class="card-divider"></div>
+      <div class="card-price">PKR 3,800</div>
+    </div>
+  </div>
+
+  <!-- 3 Chocolate Hazelnut Cupcake -->
+  <div class="product-card" data-category="pastries">
+    <div class="card-img-wrap">
+      <img class="card-img" src="https://images.unsplash.com/photo-1599785209707-a456fc1337bb?w=500&q=80" alt="Chocolate Hazelnut Cupcake"/>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Cupcakes</div>
+      <div class="card-name">Chocolate Hazelnut Cupcake</div>
+      <div class="card-desc">Chocolate cupcake topped with hazelnut buttercream and crunchy praline.</div>
+      <div class="card-divider"></div>
+      <div class="card-price">PKR 450</div>
+    </div>
+  </div>
+
+  <!-- 4 Fudgy Brownie -->
+  <div class="product-card" data-category="pastries">
+    <div class="card-img-wrap">
+      <img class="card-img" src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&q=80" alt="Fudgy Brownie"/>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Brownies</div>
+      <div class="card-name">Fudgy Brownie</div>
+      <div class="card-desc">Rich, dense and fudgy chocolate brownie with a perfect crackly top.</div>
+      <div class="card-divider"></div>
+      <div class="card-price">PKR 550</div>
+    </div>
+  </div>
+
+  <!-- 5 Mini Indulgence Box -->
+  <div class="product-card" data-category="gifts">
+    <div class="card-img-wrap">
+      <img class="card-img" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=500&q=80" alt="Mini Indulgence Box"/>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Dessert Boxes</div>
+      <div class="card-name">Mini Indulgence Box</div>
+      <div class="card-desc">A curated box of our bestsellers perfect for gifting and celebrating.</div>
+      <div class="card-divider"></div>
+      <div class="card-price">PKR 2,750</div>
+    </div>
+  </div>
+
+  <!-- 6 Red Velvet Cake -->
+  <div class="product-card" data-category="cakes">
+    <div class="card-img-wrap">
+      <img class="card-img" src="https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=500&q=80" alt="Red Velvet Cake"/>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Cakes</div>
+      <div class="card-name">Red Velvet Cake</div>
+      <div class="card-desc">Classic red velvet with cream cheese frosting and a velvety crumb.</div>
+      <div class="card-divider"></div>
+      <div class="card-price">PKR 4,500</div>
+    </div>
+  </div>
+
+  <!-- 7 Croissant -->
+  <div class="product-card" data-category="breads">
+    <div class="card-img-wrap">
+      <img class="card-img" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=500&q=80" alt="Butter Croissant"/>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Breads</div>
+      <div class="card-name">Butter Croissant</div>
+      <div class="card-desc">Flaky, golden layers of pure butter pastry baked fresh each morning.</div>
+      <div class="card-divider"></div>
+      <div class="card-price">PKR 280</div>
+    </div>
+  </div>
+
+  <!-- 8 Opera Cake -->
+  <div class="product-card" data-category="cakes">
+    <div class="card-img-wrap">
+      <img class="card-img" src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=500&q=80" alt="Opera Cake"/>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Cakes</div>
+      <div class="card-name">Opera Cake</div>
+      <div class="card-desc">Layers of joconde sponge, coffee syrup, ganache and buttercream.</div>
+      <div class="card-divider"></div>
+      <div class="card-price">PKR 5,200</div>
+    </div>
+  </div>
+
+  <!-- 9 Sourdough Loaf -->
+  <div class="product-card" data-category="breads">
+    <div class="card-img-wrap">
+      <img class="card-img" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&q=80" alt="Sourdough Loaf"/>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Breads</div>
+      <div class="card-name">Sourdough Loaf</div>
+      <div class="card-desc">Slow-fermented artisan sourdough with a crackling crust and open crumb.</div>
+      <div class="card-divider"></div>
+      <div class="card-price">PKR 900</div>
+    </div>
+  </div>
+
+  <!-- 10 Luxury Gift Hamper -->
+  <div class="product-card" data-category="gifts">
+    <div class="card-img-wrap">
+      <img class="card-img" src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=500&q=80" alt="Luxury Gift Hamper"/>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Gifts</div>
+      <div class="card-name">Luxury Gift Hamper</div>
+      <div class="card-desc">A handpicked selection of our finest sweets, pralines, and pastries.</div>
+      <div class="card-divider"></div>
+      <div class="card-price">PKR 6,500</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-col">
+    <div class="footer-icon">
+      <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" fill="currentColor" stroke="none"/></svg>
+    </div>
+    <div class="footer-col-content">
+      <div class="footer-label">WhatsApp Orders</div>
+      <div class="footer-main">+92 300 1234567</div>
+      <div class="footer-sub">We're here to take your orders</div>
+    </div>
+  </div>
+
+  <div class="footer-col">
+    <div class="footer-icon">
+      <svg viewBox="0 0 24 24" stroke-width="1.5" stroke="#d4af6a"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </div>
+    <div class="footer-col-content">
+      <div class="footer-label">Instagram</div>
+      <div class="footer-main">@maisoncrumb.pk</div>
+      <div class="footer-sub">Follow us for daily delights</div>
+    </div>
+  </div>
+
+  <div class="footer-col">
+    <div class="footer-icon">
+      <svg viewBox="0 0 24 24" stroke-width="1.5" stroke="#d4af6a"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    </div>
+    <div class="footer-col-content">
+      <div class="footer-label">Location</div>
+      <div class="footer-main">Karachi, Pakistan</div>
+      <div class="footer-sub">Proudly baking for you</div>
+    </div>
+  </div>
+
+  <div class="footer-logo-circle">MC</div>
+</footer>
+
+<script>
+  // Filter functionality
+  const btns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.product-card');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

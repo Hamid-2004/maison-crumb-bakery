@@ -1,0 +1,79 @@
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+  nav {
+    padding: 16px 20px;
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .nav-links {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+  }
+
+  .nav-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero {
+    padding: 60px 20px 40px;
+  }
+
+  .hero h1 {
+    font-size: 52px;
+    line-height: 0.95;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+  }
+
+  .divider-ornament .line {
+    width: 40px;
+  }
+
+  .filter-bar {
+    gap: 8px;
+  }
+
+  .filter-btn {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+    padding: 0 20px 60px;
+    gap: 18px;
+  }
+
+  .card-body {
+    padding: 18px;
+  }
+
+  .card-name {
+    font-size: 24px;
+  }
+
+  footer {
+    grid-template-columns: 1fr;
+    padding: 36px 20px 90px;
+  }
+
+  .footer-logo-circle {
+    right: 20px;
+    bottom: 20px;
+  }
+}
